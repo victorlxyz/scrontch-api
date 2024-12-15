@@ -8,19 +8,19 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "ingredientsubstitute")
-public class IngredientSubstitute {
+public class Ingredientsubstitute {
     @SequenceGenerator(name = "ingredientsubstitute_id_gen", sequenceName = "ingredient_ingredientid_seq", allocationSize = 1)
     @EmbeddedId
-    private IngredientSubstituteId id;
+    private IngredientsubstituteId id;
 
     @MapsId("ingredientid")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ingredientid", nullable = false)
-    private Ingredient ingredientId;
+    private Ingredient ingredientid;
 
     @MapsId("substituteingredientid")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "substituteingredientid", nullable = false)
-    private Ingredient substituteIngredientId;
+    private Ingredient substituteingredientid;
 
 }

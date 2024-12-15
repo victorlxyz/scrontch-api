@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
+
 @Getter
 @Setter
 @Entity
@@ -23,5 +25,15 @@ public class Ingredient {
 
     @Column(name = "description", length = 2000)
     private String description;
+
+    @Column(name = "createdat", nullable = false)
+    private Instant createdat;
+
+    @Column(name = "updatedat")
+    private Instant updatedat;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "categoryid", nullable = false)
+    private Category categoryid;
 
 }
