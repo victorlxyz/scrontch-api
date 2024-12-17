@@ -3,7 +3,6 @@ package xyz.victorl.scrontch.ingredient.mapper;
 import org.mapstruct.*;
 import xyz.victorl.scrontch.ingredient.dto.IngredientSubstituteDto;
 import xyz.victorl.scrontch.ingredient.entity.Ingredientsubstitute;
-import xyz.victorl.scrontch.ingredient.entity.IngredientsubstituteId;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface IngredientSubstituteMapper {
@@ -15,12 +14,12 @@ public interface IngredientSubstituteMapper {
 
     // Map from DTO to Entity
     @Mapping(source = "ingredientId", target = "id.ingredientid")
-    @Mapping(source = "substituteIngredientId", target = "id.substituteingredientid")
+    @Mapping(source = "substituteingredientid", target = "id.substituteingredientid")
     Ingredientsubstitute toEntity(IngredientSubstituteDto ingredientSubstituteDto);
 
     // Update existing entity with new DTO
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "ingredientId", target = "id.ingredientid")
-    @Mapping(source = "substituteIngredientId", target = "id.substituteingredientid")
+    @Mapping(source = "substituteingredientid", target = "id.substituteingredientid")
     Ingredientsubstitute partialUpdate(IngredientSubstituteDto ingredientSubstituteDto, @MappingTarget Ingredientsubstitute ingredientsubstitute);
 }

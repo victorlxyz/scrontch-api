@@ -14,6 +14,6 @@ public class IngredientDto implements Serializable {
     String name;
     String image;
     String description;
-    Instant createdAt;
-    Instant updatedAt;
+    Instant createdat;
+    Instant updatedat;
 }
