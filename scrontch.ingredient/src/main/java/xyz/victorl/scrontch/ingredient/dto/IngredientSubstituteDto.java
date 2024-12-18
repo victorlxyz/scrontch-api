@@ -7,5 +7,5 @@ import java.io.Serializable;
 @Value
 public class IngredientSubstituteDto implements Serializable {
     Integer ingredientId;
-    Integer substituteIngredientId;
+    Integer substituteingredientid;
 }

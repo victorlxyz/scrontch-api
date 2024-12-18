@@ -2,8 +2,8 @@
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
-    <option name="reLastEntityCreationPackage" value="scrontch.ingredient/src/main/java/xyz/victorl/scrontch/ingredient/entity" />
+    <option name="reLastEntityCreationPackage" value="scrontch.users/src/main/java/xyz/victorl/scrontch/users/entity" />
     <option name="renamerInitialized" value="true" />
-    <option name="reverseEngineeringLastDbConnectionId" value="45d4687b-dc80-4889-b6df-d2c214f8d72b" />
+    <option name="reverseEngineeringLastDbConnectionId" value="45d4687b-dc80-4889-b6df-d2c214f8d72b__scrontch_users_public" />
   </component>
 </project>
