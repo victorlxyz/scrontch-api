@@ -23,7 +23,7 @@ public class User {
     @Column(name = "email", nullable = false, length = 150)
     private String email;
 
-    @Column(name = "passwordhash", nullable = false, length = 150)
+    @Column(name = "passwordhash", nullable = false, length = 225)
     private String passwordhash;
 
     @Column(name = "avatarurl", length = 150)
