@@ -44,6 +44,9 @@ public class User {
     @Column(name = "isemailnotifyenabled", nullable = false)
     private Boolean isemailnotifyenabled = false;
 
+    @Column(name = "emailverified", nullable = false)
+    private Boolean emailVerified = false;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "roleid", nullable = false)
     private Role roleid;
@@ -51,5 +54,7 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "statusid", nullable = false)
     private Status statusid;
+
+
 
 }

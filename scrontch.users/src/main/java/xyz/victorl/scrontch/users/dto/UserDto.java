@@ -20,6 +20,7 @@ public class UserDto implements Serializable {
     Instant lastloginat;
     Boolean ispushnotifyenabled;
     Boolean isemailnotifyenabled;
+    Boolean emailVerified;
     RoleDto roleid;
     StatusDto statusid;
 }

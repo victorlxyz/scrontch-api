@@ -19,6 +19,19 @@ public class JwtUtils {
     @Value("${jwt.expiration}")
     private Long expiration;
 
+    public SecretKey getSecretKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public String extractUsername(String token) {
+        return Jwts.parser()
+                .setSigningKey(getSecretKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
+
     public String generateToken(String username, String role) {
         Date expirationDate = new Date(System.currentTimeMillis() + expiration);
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));

@@ -1,10 +1,12 @@
 package xyz.victorl.scrontch.users.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.victorl.scrontch.users.dto.UserDto;
-import xyz.victorl.scrontch.users.entity.User;
 import xyz.victorl.scrontch.users.mapper.UserMapper;
 import xyz.victorl.scrontch.users.repository.UserRepository;
 import xyz.victorl.scrontch.users.service.UserService;
@@ -30,20 +32,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findById(Integer id) {
-        User user = userRepository.findById(id)
+        xyz.victorl.scrontch.users.entity.User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return userMapper.toDto(user);
     }
 
     @Override
     public UserDto create(UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
+        xyz.victorl.scrontch.users.entity.User user = userMapper.toEntity(userDto);
         return userMapper.toDto(userRepository.save(user));
     }
 
     @Override
     public UserDto update(Integer id, UserDto userDto) {
-        User user = userRepository.findById(id)
+        xyz.victorl.scrontch.users.entity.User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         userMapper.partialUpdate(userDto, user);
@@ -58,4 +60,15 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        xyz.victorl.scrontch.users.entity.User user = userRepository.findByUsernameOrEmail(username, username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username or email: " + username));
+
+        return User.builder()
+                .username(user.getUsername())
+                .password(user.getPasswordhash())
+                .roles(user.getRoleid().getName())
+                .build();
+    }
 }
