@@ -16,4 +16,5 @@ public class IngredientDto implements Serializable {
     String description;
     Instant createdat;
     Instant updatedat;
+    Integer categoryid;
 }
