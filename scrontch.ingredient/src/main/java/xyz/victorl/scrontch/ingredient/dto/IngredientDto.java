@@ -1,14 +1,16 @@
 package xyz.victorl.scrontch.ingredient.dto;
 
+import lombok.Data;
 import lombok.Value;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * DTO for {@link xyz.victorl.scrontch.ingredient.entity.Ingredient}
  */
-@Value
+@Data
 public class IngredientDto implements Serializable {
     Integer id;
     String name;
@@ -17,4 +19,5 @@ public class IngredientDto implements Serializable {
     Instant createdat;
     Instant updatedat;
     Integer categoryid;
+    List<IngredientSubstituteDto> substitutes;
 }
