@@ -20,4 +20,5 @@ public class IngredientDto implements Serializable {
     Instant createdat;
     Instant updatedat;
     Integer categoryid;
+    Boolean isFemale;
 }

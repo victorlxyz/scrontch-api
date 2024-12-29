@@ -39,6 +39,9 @@ public class Ingredient {
     @JoinColumn(name = "categoryid", nullable = false)
     private Category categoryid;
 
+    @Column(name = "isfemale", nullable = false)
+    private Boolean isFemale = false;
+
     @PrePersist
     public void prePersist() {
         if (createdat == null) {
