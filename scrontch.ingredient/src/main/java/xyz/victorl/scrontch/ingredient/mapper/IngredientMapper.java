@@ -9,15 +9,18 @@ public interface IngredientMapper {
 
     @Mapping(source = "categoryid.id", target = "categoryid")
     @Mapping(source = "alias", target = "alias")
+    @Mapping(source = "isFemale", target = "isFemale")
     IngredientDto toDto(Ingredient ingredient);
 
     @Mapping(source = "categoryid", target = "categoryid.id")
     @Mapping(source = "alias", target = "alias")
+    @Mapping(source = "isFemale", target = "isFemale")
     Ingredient toEntity(IngredientDto ingredientDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "categoryid", target = "categoryid.id")
     @Mapping(source = "alias", target = "alias")
+    @Mapping(source = "isFemale", target = "isFemale")
     Ingredient partialUpdate(IngredientDto ingredientDto, @MappingTarget Ingredient ingredient);
 
     default Ingredient map(Integer id) {
