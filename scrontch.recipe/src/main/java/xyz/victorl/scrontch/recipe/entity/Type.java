@@ -21,6 +21,9 @@ public class Type {
     @Column(name = "typename", nullable = false, length = 100)
     private String typename;
 
+    @Column(name = "typeicon", nullable = true, length = 255)
+    private String typeicon;
+
     @OneToMany(mappedBy = "typeid")
     private Set<Recipe> recipes = new LinkedHashSet<>();
 

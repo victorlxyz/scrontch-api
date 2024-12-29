@@ -11,4 +11,5 @@ import java.io.Serializable;
 public class TypeDto implements Serializable {
     Integer id;
     String typename;
+    String typeicon;
 }
