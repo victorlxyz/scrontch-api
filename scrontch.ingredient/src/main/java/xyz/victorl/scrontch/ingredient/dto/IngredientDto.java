@@ -14,10 +14,10 @@ import java.util.List;
 public class IngredientDto implements Serializable {
     Integer id;
     String name;
+    String alias;
     String image;
     String description;
     Instant createdat;
     Instant updatedat;
     Integer categoryid;
-    List<IngredientSubstituteDto> substitutes;
 }

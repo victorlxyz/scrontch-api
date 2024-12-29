@@ -26,6 +26,9 @@ public class Ingredient {
     @Column(name = "description", length = 2000)
     private String description;
 
+    @Column(name = "alias", length = 200)
+    private String alias;
+
     @Column(name = "createdat", nullable = false)
     private Instant createdat;
 
@@ -35,5 +38,17 @@ public class Ingredient {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoryid", nullable = false)
     private Category categoryid;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdat == null) {
+            createdat = Instant.now();
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedat = Instant.now();
+    }
 
 }

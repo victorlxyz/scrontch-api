@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xyz.victorl.scrontch.ingredient.dto.IngredientDto;
+import xyz.victorl.scrontch.ingredient.entity.Ingredient;
 import xyz.victorl.scrontch.ingredient.service.IngredientService;
 
 import java.util.List;
@@ -45,5 +46,10 @@ public class IngredientController {
     public ResponseEntity<Void> deleteIngredient(@PathVariable Integer id) {
         ingredientService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search")
+    public List<Ingredient> searchIngredients(@RequestParam String query) {
+        return ingredientService.searchIngredients(query);
     }
 }

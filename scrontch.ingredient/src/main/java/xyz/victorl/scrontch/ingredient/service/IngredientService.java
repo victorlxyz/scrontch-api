@@ -1,6 +1,7 @@
 package xyz.victorl.scrontch.ingredient.service;
 
 import xyz.victorl.scrontch.ingredient.dto.IngredientDto;
+import xyz.victorl.scrontch.ingredient.entity.Ingredient;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface IngredientService {
     IngredientDto update(Integer id, IngredientDto ingredientDto);
 
     void delete(Integer id);
+
+    List<Ingredient> searchIngredients(String query);
 }
