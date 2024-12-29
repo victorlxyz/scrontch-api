@@ -20,6 +20,6 @@ public class Recipediet {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recipeid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Recipe recipeid;
+    private Recipe recipeid;
 
 }

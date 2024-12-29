@@ -20,6 +20,6 @@ public class Country {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "continentid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Continent continentid;
+    private Continent continentid;
 
 }

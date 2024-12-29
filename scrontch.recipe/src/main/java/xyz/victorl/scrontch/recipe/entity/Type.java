@@ -22,6 +22,6 @@ public class Type {
     private String typename;
 
     @OneToMany(mappedBy = "typeid")
-    private Set<xyz.victorl.scrontch.users.entity.Recipe> recipes = new LinkedHashSet<>();
+    private Set<Recipe> recipes = new LinkedHashSet<>();
 
 }

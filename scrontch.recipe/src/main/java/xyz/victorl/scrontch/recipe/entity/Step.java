@@ -35,9 +35,9 @@ public class Step {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recipeid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Recipe recipeid;
+    private Recipe recipeid;
 
     @OneToMany(mappedBy = "stepid")
-    private Set<xyz.victorl.scrontch.users.entity.Stepingredient> stepingredients = new LinkedHashSet<>();
+    private Set<Stepingredient> stepingredients = new LinkedHashSet<>();
 
 }

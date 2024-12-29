@@ -26,14 +26,14 @@ public class Stepingredient {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "stepid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Step stepid;
+    private Step stepid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unitid")
-    private xyz.victorl.scrontch.users.entity.Unit unitid;
+    private Unit unitid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "preparationid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Preparationmethod preparationid;
+    private Preparationmethod preparationid;
 
 }

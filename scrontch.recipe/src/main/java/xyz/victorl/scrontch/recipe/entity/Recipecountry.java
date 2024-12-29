@@ -16,11 +16,11 @@ public class Recipecountry {
     @MapsId("countryid")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "countryid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Country countryid;
+    private Country countryid;
 
     @MapsId("recipeid")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recipeid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Recipe recipeid;
+    private Recipe recipeid;
 
 }

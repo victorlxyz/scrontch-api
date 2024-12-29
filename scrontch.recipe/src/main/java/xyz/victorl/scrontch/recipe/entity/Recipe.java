@@ -45,18 +45,18 @@ public class Recipe {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "typeid", nullable = false)
-    private xyz.victorl.scrontch.users.entity.Type typeid;
+    private Type typeid;
 
     @ManyToMany
     @JoinTable(name = "recipecountry",
             joinColumns = @JoinColumn(name = "recipeid"),
             inverseJoinColumns = @JoinColumn(name = "countryid"))
-    private Set<xyz.victorl.scrontch.users.entity.Country> countries = new LinkedHashSet<>();
+    private Set<Country> countries = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "recipeid")
-    private Set<xyz.victorl.scrontch.users.entity.Recipediet> recipediets = new LinkedHashSet<>();
+    private Set<Recipediet> recipediets = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "recipeid")
-    private Set<xyz.victorl.scrontch.users.entity.Step> steps = new LinkedHashSet<>();
+    private Set<Step> steps = new LinkedHashSet<>();
 
 }
