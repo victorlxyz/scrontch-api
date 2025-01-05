@@ -37,7 +37,7 @@ public class Step {
     @JoinColumn(name = "recipeid", nullable = false)
     private Recipe recipeid;
 
-    @OneToMany(mappedBy = "stepid")
+    @OneToMany(mappedBy = "stepid", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Stepingredient> stepingredients = new LinkedHashSet<>();
 
 }

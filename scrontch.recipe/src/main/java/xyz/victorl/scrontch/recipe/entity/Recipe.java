@@ -53,10 +53,44 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "countryid"))
     private Set<Country> countries = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "recipeid")
+    @OneToMany(mappedBy = "recipeid", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Recipediet> recipediets = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "recipeid")
+    @OneToMany(mappedBy = "recipeid", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Step> steps = new LinkedHashSet<>();
 
+    @PrePersist
+    public void prePersist() {
+        if (createdat == null) {
+            createdat = Instant.now();
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedat = Instant.now();
+    }
+
+    @Transient
+    public String getFormattedTotalTime() {
+        if (steps == null || steps.isEmpty()) {
+            return "0 m";
+        }
+
+        // Calculate total time in minutes
+        int totalMinutes = steps.stream()
+                .mapToInt(Step::getLength)
+                .sum();
+
+        // Convert to hours and minutes
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+
+        // Format in French style
+        if (hours > 0) {
+            return minutes > 0 ? String.format("%d h %d", hours, minutes) : String.format("%d h", hours);
+        } else {
+            return String.format("%d m", minutes);
+        }
+    }
 }
