@@ -1,13 +1,13 @@
-package xyz.victorl.scrontch.comment;
+package xyz.victorl.scrontch.shoppinglist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class ShoppingListApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(ShoppingListApplication.class, args);
 	}
 
 }

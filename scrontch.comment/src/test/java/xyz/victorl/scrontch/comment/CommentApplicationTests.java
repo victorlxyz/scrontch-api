@@ -1,10 +1,10 @@
-package xyz.victorl.scrontch.ingredient;
+package xyz.victorl.scrontch.comment;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class CommentApplicationTests {
 
 	@Test
 	void contextLoads() {

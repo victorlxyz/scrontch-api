@@ -1,10 +1,10 @@
-package xyz.victorl.scrontch.users;
+package xyz.victorl.scrontch.shoppinglist;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class ShoppingListApplicationTests {
 
 	@Test
 	void contextLoads() {

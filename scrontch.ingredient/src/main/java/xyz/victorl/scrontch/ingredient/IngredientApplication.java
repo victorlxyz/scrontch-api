@@ -1,13 +1,13 @@
-package xyz.victorl.scrontch.recipe;
+package xyz.victorl.scrontch.ingredient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class IngredientApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(IngredientApplication.class, args);
 	}
 
 }

@@ -1,10 +1,10 @@
-package xyz.victorl.scrontch.diet;
+package xyz.victorl.scrontch.recipe;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class RecipeApplicationTests {
 
 	@Test
 	void contextLoads() {
