@@ -47,7 +47,6 @@ public class UserIngredientServiceImpl implements UserIngredientService {
         UserIngredient userIngredient = new UserIngredient();
         userIngredient.setIngredientid(userIngredientDto.getIngredientid());
         userIngredient.setUserid(user);
-        userIngredient.setIsessential(userIngredientDto.getIsessential());
 
         return userIngredientMapper.toDto(userIngredientRepository.save(userIngredient));
     }
@@ -62,8 +61,6 @@ public class UserIngredientServiceImpl implements UserIngredientService {
         User user = userRepository.findById(userIngredientDto.getUserid())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         userIngredient.setUserid(user);
-
-        userIngredient.setIsessential(userIngredientDto.getIsessential());
 
 
         return userIngredientMapper.toDto(userIngredientRepository.save(userIngredient));

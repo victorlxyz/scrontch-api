@@ -15,5 +15,4 @@ public class UserIngredientDto implements Serializable {
     Integer id;
     Integer ingredientid;
     Integer userid;
-    Boolean isessential;
 }
