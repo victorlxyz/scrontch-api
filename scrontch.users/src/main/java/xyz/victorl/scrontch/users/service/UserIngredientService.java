@@ -14,4 +14,6 @@ public interface UserIngredientService {
     UserIngredientDto update(Integer id, UserIngredientDto userIngredientDto);
 
     void delete(Integer id);
+
+    List<UserIngredientDto> findByUserId(Integer userId);
 }

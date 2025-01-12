@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import xyz.victorl.scrontch.users.dto.UserDietDto;
 import xyz.victorl.scrontch.users.dto.UserFavoriteDto;
 import xyz.victorl.scrontch.users.service.UserFavoriteService;
 
@@ -45,5 +46,11 @@ public class UserFavoriteController {
     public ResponseEntity<Void> deleteUserFavorite(@PathVariable Integer id) {
         userFavoriteService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<UserFavoriteDto>> getUserFavorites(@PathVariable Integer userId) {
+        List<UserFavoriteDto> userFavorites = userFavoriteService.findByUserId(userId);
+        return ResponseEntity.ok(userFavorites);
     }
 }

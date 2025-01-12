@@ -39,7 +39,7 @@ public class UserDietServiceImpl implements UserDietService {
 
     @Override
     public UserDietDto create(UserDietDto userDietDto) {
-        // Fetch the User entity using the userid (integer)
+        // Fetch the User entity using the userId (Integer)
         User user = userRepository.findById(userDietDto.getUserid())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -78,7 +78,12 @@ public class UserDietServiceImpl implements UserDietService {
 
     @Override
     public List<UserDietDto> findByUserId(Integer userId) {
-        List<UserDiet> userDiets = userDietRepository.findByUserid(userId);
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<UserDiet> userDiets = userDietRepository.findByUserid(user);
+
         return userDiets.stream()
                 .map(userDietMapper::toDto)
                 .collect(Collectors.toList());

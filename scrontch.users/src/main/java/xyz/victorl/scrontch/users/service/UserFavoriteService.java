@@ -1,5 +1,6 @@
 package xyz.victorl.scrontch.users.service;
 
+import xyz.victorl.scrontch.users.dto.UserDietDto;
 import xyz.victorl.scrontch.users.dto.UserFavoriteDto;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface UserFavoriteService {
     UserFavoriteDto update(Integer id, UserFavoriteDto userFavoriteDto);
 
     void delete(Integer id);
+
+    List<UserFavoriteDto> findByUserId(Integer userId);
 }

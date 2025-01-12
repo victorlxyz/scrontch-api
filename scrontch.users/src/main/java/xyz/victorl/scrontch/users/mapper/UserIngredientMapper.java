@@ -6,8 +6,11 @@ import xyz.victorl.scrontch.users.entity.UserIngredient;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {UserMapper.class})
 public interface UserIngredientMapper {
+
+    @Mapping(source = "userid", target = "userid")
     UserIngredient toEntity(UserIngredientDto userIngredientDto);
 
+    @Mapping(source = "userid.id", target = "userid")
     UserIngredientDto toDto(UserIngredient userIngredient);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

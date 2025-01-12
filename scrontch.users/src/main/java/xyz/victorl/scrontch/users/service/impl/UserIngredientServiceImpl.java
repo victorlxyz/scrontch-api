@@ -3,10 +3,14 @@ package xyz.victorl.scrontch.users.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.victorl.scrontch.users.dto.UserFavoriteDto;
 import xyz.victorl.scrontch.users.dto.UserIngredientDto;
+import xyz.victorl.scrontch.users.entity.User;
+import xyz.victorl.scrontch.users.entity.UserFavorite;
 import xyz.victorl.scrontch.users.entity.UserIngredient;
 import xyz.victorl.scrontch.users.mapper.UserIngredientMapper;
 import xyz.victorl.scrontch.users.repository.UserIngredientRepository;
+import xyz.victorl.scrontch.users.repository.UserRepository;
 import xyz.victorl.scrontch.users.service.UserIngredientService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +22,7 @@ public class UserIngredientServiceImpl implements UserIngredientService {
 
     private final UserIngredientRepository userIngredientRepository;
     private final UserIngredientMapper userIngredientMapper;
+    private final UserRepository userRepository;
 
     @Override
     public List<UserIngredientDto> findAll() {
@@ -36,7 +41,14 @@ public class UserIngredientServiceImpl implements UserIngredientService {
 
     @Override
     public UserIngredientDto create(UserIngredientDto userIngredientDto) {
-        UserIngredient userIngredient = userIngredientMapper.toEntity(userIngredientDto);
+        User user = userRepository.findById(userIngredientDto.getUserid())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserIngredient userIngredient = new UserIngredient();
+        userIngredient.setIngredientid(userIngredientDto.getIngredientid());
+        userIngredient.setUserid(user);
+        userIngredient.setIsessential(userIngredientDto.getIsessential());
+
         return userIngredientMapper.toDto(userIngredientRepository.save(userIngredient));
     }
 
@@ -45,7 +57,15 @@ public class UserIngredientServiceImpl implements UserIngredientService {
         UserIngredient userIngredient = userIngredientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("UserIngredient not found"));
 
-        userIngredientMapper.partialUpdate(userIngredientDto, userIngredient);
+        userIngredient.setIngredientid(userIngredientDto.getIngredientid());
+
+        User user = userRepository.findById(userIngredientDto.getUserid())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userIngredient.setUserid(user);
+
+        userIngredient.setIsessential(userIngredientDto.getIsessential());
+
+
         return userIngredientMapper.toDto(userIngredientRepository.save(userIngredient));
     }
 
@@ -55,5 +75,17 @@ public class UserIngredientServiceImpl implements UserIngredientService {
             throw new RuntimeException("UserIngredient not found");
         }
         userIngredientRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UserIngredientDto> findByUserId(Integer userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<UserIngredient> userIngredients = userIngredientRepository.findByUserid(user);
+
+        return userIngredients.stream()
+                .map(userIngredientMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import xyz.victorl.scrontch.users.dto.UserDietDto;
+import xyz.victorl.scrontch.users.dto.UserFavoriteDto;
 import xyz.victorl.scrontch.users.dto.UserIngredientDto;
 import xyz.victorl.scrontch.users.service.UserIngredientService;
 
@@ -45,5 +47,11 @@ public class UserIngredientController {
     public ResponseEntity<Void> deleteUserIngredient(@PathVariable Integer id) {
         userIngredientService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<UserIngredientDto>> getUserIngredients(@PathVariable Integer userId) {
+        List<UserIngredientDto> userIngredients = userIngredientService.findByUserId(userId);
+        return ResponseEntity.ok(userIngredients);
     }
 }
