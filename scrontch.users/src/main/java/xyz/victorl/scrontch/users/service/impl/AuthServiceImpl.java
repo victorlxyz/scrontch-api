@@ -65,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
         emailVerificationTokenRepository.save(verificationToken);
 
         // Build verification URL
-        String verificationUrl = "http://localhost:8086/api/v1/auth/verify-email?token=" + token;
+        String verificationUrl = "http://192.168.1.21:8086/api/v1/auth/verify-email?token=" + token;
 
         // Use EmailNotificationService to send verification email
         emailNotificationService.sendAccountVerificationEmail(user, verificationUrl);
@@ -74,18 +74,21 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public JwtResponse login(LoginDto loginDto) {
         User user = userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(), loginDto.getUsernameOrEmail())
-                .orElseThrow(() -> new RuntimeException("Invalid username or email"));
+                .orElseThrow(() -> new RuntimeException("Nom d'utilisateur ou mot de passe incorrect"));
 
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPasswordhash())) {
-            throw new RuntimeException("Invalid password");
+            throw new RuntimeException("Mot de passe incorrect");
         }
 
         if (!user.getEmailVerified()) {
-            throw new RuntimeException("Email not verified. Please verify your email before logging in.");
+            throw new RuntimeException("Vous n'avez pas vérifié votre adresse email. Vérifiez votre email avant de continuer.");
         }
 
+        user.setLastloginat(Instant.now());
+        userRepository.save(user);
+
         String token = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
-        return new JwtResponse(token, user.getUsername(), user.getEmail(), user.getRoleid().getName());
+        return new JwtResponse(token, user.getUsername(), user.getEmail(), user.getRoleid().getName(), user.getId());
     }
 
     @Override
@@ -102,8 +105,7 @@ public class AuthServiceImpl implements AuthService {
             System.out.println("User verified: " + user.getUsername());
             return true;
         }
-        System.out.println("Invalid or expired token");
-        return false;
+        throw new RuntimeException("Token expiré ou invalide");
     }
 
 }

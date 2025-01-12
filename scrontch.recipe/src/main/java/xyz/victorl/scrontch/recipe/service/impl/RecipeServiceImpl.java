@@ -81,12 +81,21 @@ public class RecipeServiceImpl implements RecipeService {
                 .map(Stepingredient::getIngredientid)
                 .collect(Collectors.toList());
 
-        Map<Integer, Boolean> pantryStatusMap = getPantryStatusForUser (userId, ingredientIds);
+        Map<Integer, Boolean> pantryStatusMap = getPantryStatusForUser(userId, ingredientIds);
 
         return stepIngredients.stream()
                 .map(stepIngredient -> {
-                    IngredientDto ingredientDto = ingredientService.getIngredientById(stepIngredient.getIngredientid());
-                    String ingredientName = ingredientDto != null ? ingredientDto.getName() : "Unknown";
+                    IngredientDto ingredientDto = null;
+                    try {
+                        ingredientDto = ingredientService.getIngredientById(stepIngredient.getIngredientid());
+                    } catch (Exception e) {
+                        System.out.println("Error fetching ingredient ID " + stepIngredient.getIngredientid() + ": " + e.getMessage());
+                    }
+
+                    String ingredientName = ingredientDto != null && ingredientDto.getName() != null
+                            ? ingredientDto.getName()
+                            : "Unknown Ingredient";
+
                     Boolean pantryStatus = pantryStatusMap.getOrDefault(stepIngredient.getIngredientid(), false);
                     UnitDto unitDto = unitMapper.toDto(stepIngredient.getUnitid());
                     PreparationmethodDto preparationmethodDto = preparationmethodMapper.toDto(stepIngredient.getPreparationid());

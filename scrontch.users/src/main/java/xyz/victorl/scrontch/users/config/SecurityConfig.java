@@ -40,6 +40,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/api/v1/users").hasRole("Admin")
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

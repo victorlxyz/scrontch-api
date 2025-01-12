@@ -11,5 +11,5 @@ import java.io.Serializable;
 public class UserDietDto implements Serializable {
     Integer id;
     Integer dietid;
-    UserDto userid;
+    Integer userid;
 }
