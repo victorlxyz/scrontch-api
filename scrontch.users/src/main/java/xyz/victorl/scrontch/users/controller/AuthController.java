@@ -26,4 +26,14 @@ public class AuthController {
         JwtResponse jwtResponse = authService.login(loginDto);
         return ResponseEntity.ok(jwtResponse);
     }
+
+    @GetMapping("/verify-email")
+    public ResponseEntity<String> verifyEmail(@RequestParam String token) {
+        boolean isVerified = authService.verifyEmail(token);
+        if (isVerified) {
+            return ResponseEntity.ok("Email verified successfully!");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid or expired token.");
+        }
+    }
 }

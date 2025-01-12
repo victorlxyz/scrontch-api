@@ -87,4 +87,23 @@ public class AuthServiceImpl implements AuthService {
         String token = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
         return new JwtResponse(token, user.getUsername(), user.getEmail(), user.getRoleid().getName());
     }
+
+    @Override
+    public boolean verifyEmail(String token) {
+        EmailVerificationToken verificationToken = emailVerificationTokenRepository.findByToken(token);
+        if (verificationToken != null && verificationToken.getExpiryDate().isAfter(Instant.now())) {
+            User user = verificationToken.getUser();
+            user.setEmailVerified(true);
+            userRepository.save(user);
+            // Delete the verification token since it's no longer needed
+            emailVerificationTokenRepository.deleteById(verificationToken.getId());
+            // Send confirmation email
+            emailNotificationService.sendAccountValidationEmail(user);
+            System.out.println("User verified: " + user.getUsername());
+            return true;
+        }
+        System.out.println("Invalid or expired token");
+        return false;
+    }
+
 }
