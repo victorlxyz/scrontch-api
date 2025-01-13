@@ -15,6 +15,7 @@ public class EssentialIngredient {
     @Column(nullable = false)
     private Integer ingredientid;
 
-    @Column(nullable = false)
-    private Integer userid;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "userid", nullable = false)
+    private User userid;
 }

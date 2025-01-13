@@ -36,7 +36,9 @@ public class SecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(c ->c.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf((csrf) -> csrf
+                        .ignoringRequestMatchers("/api/**")
+                )
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/api/v1/users").hasRole("Admin")
                         .requestMatchers("/api/v1/auth/**").permitAll()

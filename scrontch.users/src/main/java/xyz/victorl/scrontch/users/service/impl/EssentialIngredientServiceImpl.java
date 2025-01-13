@@ -42,16 +42,24 @@ public class EssentialIngredientServiceImpl implements EssentialIngredientServic
 
     @Override
     public EssentialIngredientDto create(EssentialIngredientDto essentialIngredientDto) {
-        EssentialIngredient essentialIngredient = essentialIngredientMapper.toEntity(essentialIngredientDto);
+        User user = userRepository.findById(essentialIngredientDto.getUserid())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        EssentialIngredient essentialIngredient = new EssentialIngredient();
+        essentialIngredient.setIngredientid(essentialIngredientDto.getIngredientid());
+        essentialIngredient.setUserid(user);
         return essentialIngredientMapper.toDto(essentialIngredientRepository.save(essentialIngredient));
     }
 
     @Override
     public EssentialIngredientDto update(Integer id, EssentialIngredientDto essentialIngredientDto) {
         EssentialIngredient essentialIngredient = essentialIngredientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("EssentialIngredient not found"));
+                .orElseThrow(() -> new RuntimeException("Essential ingredient not found"));
+        essentialIngredient.setIngredientid(essentialIngredientDto.getIngredientid());
+        User user = userRepository.findById(essentialIngredientDto.getUserid())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        essentialIngredient.setUserid(user);
 
-        essentialIngredientMapper.partialUpdate(essentialIngredientDto, essentialIngredient);
         return essentialIngredientMapper.toDto(essentialIngredientRepository.save(essentialIngredient));
     }
 
