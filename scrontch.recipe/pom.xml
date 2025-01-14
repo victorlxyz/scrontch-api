@@ -3,12 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>xyz.victorl</groupId>
+		<artifactId>scrontch-api</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>xyz.victorl</groupId>
 	<artifactId>scrontch.recipe</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>scrontch.recipe</name>
@@ -106,13 +105,18 @@
 			<version>5.14.2</version>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>xyz.victorl</groupId>
-            <artifactId>scrontch.ingredient</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xyz.victorl</groupId>
+			<artifactId>scrontch.common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

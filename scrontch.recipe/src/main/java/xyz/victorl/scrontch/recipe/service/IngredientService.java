@@ -3,7 +3,6 @@ package xyz.victorl.scrontch.recipe.service;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Value;
-import xyz.victorl.scrontch.ingredient.dto.IngredientDto;
 
 @Service
 public class IngredientService {

@@ -4,14 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>xyz.victorl</groupId>
-		<artifactId>scrontch.parent</artifactId>
+		<artifactId>scrontch-api</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>../scrontch.parent/pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>scrontch.comment</artifactId>
+	<artifactId>scrontch.common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>scrontch.comment</name>
-	<description>Comment microservice for Scrontch backend</description>
+	<name>scrontch.common</name>
+	<description>Common module for Scrontch backend</description>
 	<url/>
 	<licenses>
 		<license/>
