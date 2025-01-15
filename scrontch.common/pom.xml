@@ -162,6 +162,12 @@
 						</exclude>
 					</excludes>
 				</configuration>
+				<executions>
+					<execution>
+						<id>repackage</id>
+						<phase>none</phase> <!-- Disable Spring Boot re-packaging -->
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xyz.victorl.scrontch.users.dto.UserDietDto;
+import xyz.victorl.scrontch.users.dto.UserIngredientDto;
 import xyz.victorl.scrontch.users.service.UserDietService;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class UserDietController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<UserDietDto>> getUserDiets(@PathVariable Integer userId) {
+    public ResponseEntity<List<UserDietDto>> getUserDiets(@PathVariable("userId") Integer userId) {
         List<UserDietDto> userDiets = userDietService.findByUserId(userId);
         return ResponseEntity.ok(userDiets);
     }

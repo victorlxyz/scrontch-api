@@ -50,7 +50,7 @@ public class UserIngredientController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<UserIngredientDto>> getUserIngredients(@PathVariable Integer userId) {
+    public ResponseEntity<List<UserIngredientDto>> getUserIngredients(@PathVariable("userId") Integer userId) {
         List<UserIngredientDto> userIngredients = userIngredientService.findByUserId(userId);
         return ResponseEntity.ok(userIngredients);
     }

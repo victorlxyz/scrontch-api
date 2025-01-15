@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xyz.victorl.scrontch.users.dto.UserDietDto;
 import xyz.victorl.scrontch.users.dto.UserFavoriteDto;
+import xyz.victorl.scrontch.users.dto.UserIngredientDto;
 import xyz.victorl.scrontch.users.service.UserFavoriteService;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class UserFavoriteController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<UserFavoriteDto>> getUserFavorites(@PathVariable Integer userId) {
+    public ResponseEntity<List<UserFavoriteDto>> getUserFavorites(@PathVariable("userId") Integer userId) {
         List<UserFavoriteDto> userFavorites = userFavoriteService.findByUserId(userId);
         return ResponseEntity.ok(userFavorites);
     }

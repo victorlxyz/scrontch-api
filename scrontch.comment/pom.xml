@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>xyz.victorl</groupId>
-		<artifactId>scrontch.parent</artifactId>
+		<artifactId>scrontch-api</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>../scrontch.parent/pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>scrontch.comment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -162,6 +162,13 @@
 						</exclude>
 					</excludes>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

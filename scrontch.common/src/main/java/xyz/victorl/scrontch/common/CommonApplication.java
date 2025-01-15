@@ -1,13 +1,13 @@
-package xyz.victorl.scrontch.comment;
+package xyz.victorl.scrontch.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CommentApplication {
+public class CommonApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CommentApplication.class, args);
+		SpringApplication.run(CommonApplication.class, args);
 	}
 
 }
