@@ -54,4 +54,13 @@ public class UserIngredientController {
         List<UserIngredientDto> userIngredients = userIngredientService.findByUserId(userId);
         return ResponseEntity.ok(userIngredients);
     }
+
+    @DeleteMapping("/user/{userId}/ingredient/{ingredientId}")
+    public ResponseEntity<Void> deleteUserIngredientByUserIdAndIngredientId(
+            @PathVariable("userId") Integer userId,
+            @PathVariable("ingredientId") Integer ingredientId) {
+        userIngredientService.deleteByUserIdAndIngredientId(userId, ingredientId);
+        return ResponseEntity.noContent().build();
+    }
+
 }

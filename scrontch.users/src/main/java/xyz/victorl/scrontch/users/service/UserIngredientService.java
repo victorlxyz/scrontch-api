@@ -16,4 +16,6 @@ public interface UserIngredientService {
     void delete(Integer id);
 
     List<UserIngredientDto> findByUserId(Integer userId);
+
+    void deleteByUserIdAndIngredientId(Integer userId, Integer ingredientId);
 }
