@@ -62,7 +62,6 @@ public class UserIngredientServiceImpl implements UserIngredientService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         userIngredient.setUserid(user);
 
-
         return userIngredientMapper.toDto(userIngredientRepository.save(userIngredient));
     }
 
