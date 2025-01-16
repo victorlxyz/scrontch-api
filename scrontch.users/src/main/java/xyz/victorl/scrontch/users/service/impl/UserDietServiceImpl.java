@@ -88,4 +88,12 @@ public class UserDietServiceImpl implements UserDietService {
                 .map(userDietMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteByUserIdAndDietId(Integer userId, Integer dietId) {
+        if (!userDietRepository.existsByUserIdAndDietId(userId, dietId)) {
+            throw new RuntimeException("UserDiet not found for userId: " + userId + " and dietId: " + dietId);
+        }
+        userDietRepository.deleteByUserIdAndDietId(userId, dietId);
+    }
 }

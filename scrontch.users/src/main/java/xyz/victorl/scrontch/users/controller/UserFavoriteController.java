@@ -54,4 +54,13 @@ public class UserFavoriteController {
         List<UserFavoriteDto> userFavorites = userFavoriteService.findByUserId(userId);
         return ResponseEntity.ok(userFavorites);
     }
+
+    @DeleteMapping("/user/{userId}/recipe/{recipeId}")
+    public ResponseEntity<Void> deleteUserFavoriteByUserIdAndRecipeId(
+            @PathVariable("userId") Integer userId,
+            @PathVariable("recipeId") Integer recipeId) {
+        userFavoriteService.deleteByUserIdAndRecipeId(userId, recipeId);
+        return ResponseEntity.noContent().build();
+    }
+
 }

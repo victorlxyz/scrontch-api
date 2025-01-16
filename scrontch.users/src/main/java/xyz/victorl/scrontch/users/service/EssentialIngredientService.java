@@ -18,4 +18,6 @@ public interface EssentialIngredientService {
     void delete(Integer id);
 
     List<EssentialIngredientDto> findByUserId(Integer userId);
+
+    void deleteByUserIdAndIngredientId(Integer userId, Integer ingredientId);
 }

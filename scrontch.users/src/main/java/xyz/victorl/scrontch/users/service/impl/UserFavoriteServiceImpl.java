@@ -86,4 +86,12 @@ public class UserFavoriteServiceImpl implements UserFavoriteService {
                 .map(userFavoriteMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteByUserIdAndRecipeId(Integer userId, Integer recipeId) {
+        if (!userFavoriteRepository.existsByUserIdAndRecipeId(userId, recipeId)) {
+            throw new RuntimeException("UserFavorite not found for userId: " + userId + " and recipeId: " + recipeId);
+        }
+        userFavoriteRepository.deleteByUserIdAndRecipeId(userId, recipeId);
+    }
 }

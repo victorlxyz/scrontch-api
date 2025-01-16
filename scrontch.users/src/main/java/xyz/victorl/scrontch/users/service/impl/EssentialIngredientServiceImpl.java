@@ -83,4 +83,12 @@ public class EssentialIngredientServiceImpl implements EssentialIngredientServic
                 .map(essentialIngredientMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteByUserIdAndIngredientId(Integer userId, Integer ingredientId) {
+        if (!essentialIngredientRepository.existsByUserIdAndIngredientId(userId, ingredientId)) {
+            throw new RuntimeException("UserIngredient not found for userId: " + userId + " and ingredientId: " + ingredientId);
+        }
+        essentialIngredientRepository.deleteByUserIdAndIngredientId(userId, ingredientId);
+    }
 }

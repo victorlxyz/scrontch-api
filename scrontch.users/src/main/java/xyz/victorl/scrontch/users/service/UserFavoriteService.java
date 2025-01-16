@@ -17,4 +17,6 @@ public interface UserFavoriteService {
     void delete(Integer id);
 
     List<UserFavoriteDto> findByUserId(Integer userId);
+
+    void deleteByUserIdAndRecipeId(Integer userId, Integer recipeId);
 }

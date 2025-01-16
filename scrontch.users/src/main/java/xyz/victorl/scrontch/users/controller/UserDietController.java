@@ -53,4 +53,12 @@ public class UserDietController {
         List<UserDietDto> userDiets = userDietService.findByUserId(userId);
         return ResponseEntity.ok(userDiets);
     }
+
+    @DeleteMapping("/user/{userId}/diet/{dietId}")
+    public ResponseEntity<Void> deleteUserDietByUserIdAndDietId(
+            @PathVariable("userId") Integer userId,
+            @PathVariable("dietId") Integer dietId) {
+        userDietService.deleteByUserIdAndDietId(userId, dietId);
+        return ResponseEntity.noContent().build();
+    }
 }
