@@ -9,4 +9,6 @@ public interface AuthService {
     JwtResponse login(LoginDto loginDto);
 
     boolean verifyEmail(String token);
+
+    public JwtResponse refreshToken(String refreshToken);
 }

@@ -87,8 +87,10 @@ public class AuthServiceImpl implements AuthService {
         user.setLastloginat(Instant.now());
         userRepository.save(user);
 
-        String token = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
-        return new JwtResponse(token, user.getUsername(), user.getEmail(), user.getRoleid().getName(), user.getId());
+        String accessToken = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
+        String refreshToken = jwtUtils.generateRefreshToken(user.getUsername());
+
+        return new JwtResponse(accessToken, user.getUsername(), user.getEmail(), user.getRoleid().getName(), user.getId(), refreshToken);
     }
 
     @Override
@@ -107,5 +109,21 @@ public class AuthServiceImpl implements AuthService {
         }
         throw new RuntimeException("Token expiré ou invalide");
     }
+
+    @Override
+    public JwtResponse refreshToken(String refreshToken) {
+        if (!jwtUtils.validateToken(refreshToken)) {
+            throw new RuntimeException("Invalid refresh token");
+        }
+
+        String username = jwtUtils.extractUsername(refreshToken);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        String newAccessToken = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
+        String newRefreshToken = jwtUtils.generateRefreshToken(user.getUsername());
+        return new JwtResponse(newAccessToken, user.getUsername(), user.getEmail(), user.getRoleid().getName(), user.getId(), newRefreshToken);
+    }
+
 
 }

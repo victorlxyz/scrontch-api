@@ -9,6 +9,8 @@ import xyz.victorl.scrontch.users.dto.UserRegistrationDto;
 import xyz.victorl.scrontch.users.service.AuthService;
 import xyz.victorl.scrontch.users.service.impl.TokenBlacklistService;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -46,5 +48,11 @@ public class AuthController {
             tokenBlacklistService.addToBlacklist(token);
         }
         return ResponseEntity.ok("User  logged out successfully");
+    }
+
+    @PostMapping("/refresh-token")
+    public JwtResponse refreshToken(@RequestBody Map<String, String> request) {
+        String refreshToken = request.get("refreshToken");
+        return authService.refreshToken(refreshToken);
     }
 }

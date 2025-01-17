@@ -9,4 +9,5 @@ public class JwtResponse {
     String email;
     String role;
     Integer userid;
+    String refreshToken;
 }
