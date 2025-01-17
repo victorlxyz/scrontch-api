@@ -23,9 +23,7 @@ public class EmailSenderService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);
-
         mailSender.send(message);
-
         System.out.println("Mail envoyé avec succès !");
     }
 }
