@@ -43,6 +43,4 @@ public class JwtUtils {
                 .expiration(expirationDate)
                 .signWith(key, Jwts.SIG.HS256).compact();
     }
-
-
 }

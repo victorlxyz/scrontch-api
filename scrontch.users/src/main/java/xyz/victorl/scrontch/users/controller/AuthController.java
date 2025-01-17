@@ -7,6 +7,7 @@ import xyz.victorl.scrontch.users.dto.JwtResponse;
 import xyz.victorl.scrontch.users.dto.LoginDto;
 import xyz.victorl.scrontch.users.dto.UserRegistrationDto;
 import xyz.victorl.scrontch.users.service.AuthService;
+import xyz.victorl.scrontch.users.service.impl.TokenBlacklistService;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -14,6 +15,7 @@ import xyz.victorl.scrontch.users.service.AuthService;
 public class AuthController {
 
     private final AuthService authService;
+    private final TokenBlacklistService tokenBlacklistService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserRegistrationDto registrationDto) {
@@ -35,5 +37,14 @@ public class AuthController {
         } else {
             return ResponseEntity.badRequest().body("Invalid or expired token.");
         }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String authorizationHeader) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String token = authorizationHeader.substring(7);
+            tokenBlacklistService.addToBlacklist(token);
+        }
+        return ResponseEntity.ok("User  logged out successfully");
     }
 }
