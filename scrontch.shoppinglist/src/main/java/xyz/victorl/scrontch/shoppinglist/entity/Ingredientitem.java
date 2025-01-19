@@ -21,6 +21,9 @@ public class Ingredientitem {
     @Column(name = "ingredientitemdescription", length = 100)
     private String ingredientitemdescription;
 
+    @Column(name = "recipeid")
+    private Integer recipeid;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "shoppinglistid", nullable = false)
     private Shoppinglist shoppinglistid;

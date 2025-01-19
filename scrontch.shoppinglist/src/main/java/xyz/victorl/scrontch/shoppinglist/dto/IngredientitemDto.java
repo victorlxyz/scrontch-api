@@ -12,4 +12,5 @@ public class IngredientitemDto implements Serializable {
     Integer id;
     Integer ingredientid;
     String ingredientitemdescription;
+    Integer recipeid;
 }
