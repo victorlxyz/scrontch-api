@@ -11,12 +11,12 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "shoppinglist")
-public class Shoppinglist {
+@Table(name = "recipelist")
+public class Recipelist {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shoppinglist_id_gen")
-    @SequenceGenerator(name = "shoppinglist_id_gen", sequenceName = "shoppinglist_shoppinglistid_seq", allocationSize = 1)
-    @Column(name = "shoppinglistid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipelist_id_gen")
+    @SequenceGenerator(name = "recipelist_id_gen", sequenceName = "recipelist_recipelistid_seq", allocationSize = 1)
+    @Column(name = "recipelistid", nullable = false)
     private Integer id;
 
     @Column(name = "userid", nullable = false)
@@ -31,11 +31,8 @@ public class Shoppinglist {
     @Column(name = "updatedat")
     private Instant updatedat;
 
-    @OneToMany(mappedBy = "shoppinglistid", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Ingredientitem> ingredientitems = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "shoppinglistid", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Nonfooditem> nonfooditems = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "recipelistid", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Recipeitem> recipeitems = new LinkedHashSet<>();
 
     @PrePersist
     public void prePersist() {

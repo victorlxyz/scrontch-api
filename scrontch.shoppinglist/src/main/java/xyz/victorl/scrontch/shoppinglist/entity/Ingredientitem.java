@@ -18,9 +18,6 @@ public class Ingredientitem {
     @Column(name = "ingredientid")
     private Integer ingredientid;
 
-    @Column(name = "ingredientitemname", length = 100)
-    private String ingredientitemname;
-
     @Column(name = "ingredientitemdescription", length = 100)
     private String ingredientitemdescription;
 

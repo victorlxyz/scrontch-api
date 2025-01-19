@@ -14,4 +14,6 @@ public interface ShoppinglistService {
     ShoppinglistDto update(Integer id, ShoppinglistDto shoppinglistDto);
 
     void delete(Integer id);
+
+    List<ShoppinglistDto> findByUserId(Integer userid);
 }

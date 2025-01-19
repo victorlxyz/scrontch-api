@@ -11,6 +11,5 @@ import java.io.Serializable;
 public class IngredientitemDto implements Serializable {
     Integer id;
     Integer ingredientid;
-    String ingredientitemname;
     String ingredientitemdescription;
 }

@@ -57,4 +57,12 @@ public class ShoppinglistServiceImpl implements ShoppinglistService {
         }
         shoppinglistRepository.deleteById(id);
     }
+
+    @Override
+    public List<ShoppinglistDto> findByUserId(Integer userid) {
+        List<Shoppinglist> shoppinglists = shoppinglistRepository.findByUserid(userid);
+        return shoppinglists.stream()
+                .map(shoppinglistMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }

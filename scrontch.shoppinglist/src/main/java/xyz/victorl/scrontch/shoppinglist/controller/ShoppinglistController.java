@@ -46,4 +46,11 @@ public class ShoppinglistController {
         shoppinglistService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/user/{userid}")
+    public ResponseEntity<List<ShoppinglistDto>> getShoppinglistsByUserId(@PathVariable("userid") Integer userid) {
+        List<ShoppinglistDto> shoppinglists = shoppinglistService.findByUserId(userid);
+        return ResponseEntity.ok(shoppinglists);
+    }
+
 }
