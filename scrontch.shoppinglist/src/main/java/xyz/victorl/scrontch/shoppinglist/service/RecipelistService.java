@@ -1,5 +1,6 @@
 package xyz.victorl.scrontch.shoppinglist.service;
 
+import xyz.victorl.scrontch.shoppinglist.dto.RecipeitemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.RecipelistDto;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface RecipelistService {
     void delete(Integer id);
 
     List<RecipelistDto> findByUserId(Integer userid);
+
+    RecipeitemDto addRecipeItemToRecipelist(Integer recipelistId, RecipeitemDto recipeitemDto);
 }

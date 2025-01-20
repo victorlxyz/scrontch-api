@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import xyz.victorl.scrontch.shoppinglist.dto.NonfooditemDto;
+import xyz.victorl.scrontch.shoppinglist.dto.RecipeitemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.RecipelistDto;
 import xyz.victorl.scrontch.shoppinglist.service.RecipelistService;
 
@@ -51,6 +53,14 @@ public class RecipelistController {
     public ResponseEntity<List<RecipelistDto>> getRecipelistsByUserId(@PathVariable("userid") Integer userid) {
         List<RecipelistDto> recipelists = recipelistService.findByUserId(userid);
         return ResponseEntity.ok(recipelists);
+    }
+
+    @PostMapping("/{id}/recipeitems")
+    public ResponseEntity<RecipeitemDto> addRecipeitemToRecipelist(
+            @PathVariable("id") Integer recipelistId,
+            @RequestBody RecipeitemDto recipeitemDto) {
+        RecipeitemDto createdRecipeItem = recipelistService.addRecipeItemToRecipelist(recipelistId, recipeitemDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdRecipeItem);
     }
 
 }

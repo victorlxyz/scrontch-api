@@ -3,11 +3,16 @@ package xyz.victorl.scrontch.shoppinglist.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.victorl.scrontch.shoppinglist.dto.RecipeitemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.RecipelistDto;
 import xyz.victorl.scrontch.shoppinglist.dto.ShoppinglistDto;
+import xyz.victorl.scrontch.shoppinglist.entity.Nonfooditem;
+import xyz.victorl.scrontch.shoppinglist.entity.Recipeitem;
 import xyz.victorl.scrontch.shoppinglist.entity.Recipelist;
 import xyz.victorl.scrontch.shoppinglist.entity.Shoppinglist;
+import xyz.victorl.scrontch.shoppinglist.mapper.RecipeitemMapper;
 import xyz.victorl.scrontch.shoppinglist.mapper.RecipelistMapper;
+import xyz.victorl.scrontch.shoppinglist.repository.RecipeitemRepository;
 import xyz.victorl.scrontch.shoppinglist.repository.RecipelistRepository;
 import xyz.victorl.scrontch.shoppinglist.service.RecipelistService;
 
@@ -21,6 +26,8 @@ public class RecipelistServiceImpl implements RecipelistService {
 
     private final RecipelistRepository recipelistRepository;
     private final RecipelistMapper recipelistMapper;
+    private final RecipeitemRepository recipeitemRepository;
+    private final RecipeitemMapper recipeitemMapper;
 
     @Override
     public List<RecipelistDto> findAll() {
@@ -67,4 +74,16 @@ public class RecipelistServiceImpl implements RecipelistService {
                 .map(recipelistMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public RecipeitemDto addRecipeItemToRecipelist(Integer recipelistId, RecipeitemDto recipeitemDto) {
+        Recipelist recipelist = recipelistRepository.findById(recipelistId)
+                .orElseThrow(() -> new RuntimeException("Recipelist not found"));
+        Recipeitem recipeitem = recipeitemMapper.toEntity(recipeitemDto);
+        recipeitem.setRecipelistid(recipelist);
+        Recipeitem savedItem = recipeitemRepository.save(recipeitem);
+
+        return recipeitemMapper.toDto(savedItem);
+    }
+
 }

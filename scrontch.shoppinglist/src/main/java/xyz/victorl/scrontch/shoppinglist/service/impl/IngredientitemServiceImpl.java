@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.victorl.scrontch.shoppinglist.dto.IngredientitemDto;
 import xyz.victorl.scrontch.shoppinglist.entity.Ingredientitem;
+import xyz.victorl.scrontch.shoppinglist.entity.Shoppinglist;
 import xyz.victorl.scrontch.shoppinglist.mapper.IngredientitemMapper;
 import xyz.victorl.scrontch.shoppinglist.repository.IngredientitemRepository;
+import xyz.victorl.scrontch.shoppinglist.repository.ShoppinglistRepository;
 import xyz.victorl.scrontch.shoppinglist.service.IngredientitemService;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class IngredientitemServiceImpl implements IngredientitemService {
 
     private final IngredientitemRepository ingredientitemRepository;
     private final IngredientitemMapper ingredientitemMapper;
+    private final ShoppinglistRepository shoppinglistRepository;
 
     @Override
     public List<IngredientitemDto> findAll() {
@@ -57,4 +60,6 @@ public class IngredientitemServiceImpl implements IngredientitemService {
         }
         ingredientitemRepository.deleteById(id);
     }
+
+
 }
