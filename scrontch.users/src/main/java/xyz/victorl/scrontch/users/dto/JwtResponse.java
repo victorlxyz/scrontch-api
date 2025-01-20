@@ -8,4 +8,6 @@ public class JwtResponse {
     String username;
     String email;
     String role;
+    Integer userid;
+    String refreshToken;
 }

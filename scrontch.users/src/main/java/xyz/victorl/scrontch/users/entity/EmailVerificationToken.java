@@ -17,8 +17,8 @@ public class EmailVerificationToken {
 
     private String token;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    @OneToOne
+    @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false)
     private User user;
 
     private Instant expiryDate;

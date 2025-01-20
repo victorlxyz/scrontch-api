@@ -1,5 +1,7 @@
 package xyz.victorl.scrontch.shoppinglist.service;
 
+import xyz.victorl.scrontch.shoppinglist.dto.IngredientitemDto;
+import xyz.victorl.scrontch.shoppinglist.dto.NonfooditemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.ShoppinglistDto;
 
 import java.util.List;
@@ -14,4 +16,10 @@ public interface ShoppinglistService {
     ShoppinglistDto update(Integer id, ShoppinglistDto shoppinglistDto);
 
     void delete(Integer id);
+
+    List<ShoppinglistDto> findByUserId(Integer userid);
+
+    IngredientitemDto addIngredientToShoppinglist(Integer shoppinglistId, IngredientitemDto ingredientitemDto);
+
+    NonfooditemDto addNonFoodItemToShoppinglist(Integer shoppinglistId, NonfooditemDto nonfooditemDto);
 }

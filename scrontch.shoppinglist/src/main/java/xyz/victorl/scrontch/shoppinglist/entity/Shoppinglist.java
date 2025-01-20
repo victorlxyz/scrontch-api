@@ -31,10 +31,22 @@ public class Shoppinglist {
     @Column(name = "updatedat")
     private Instant updatedat;
 
-    @OneToMany(mappedBy = "shoppinglistid")
+    @OneToMany(mappedBy = "shoppinglistid", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Ingredientitem> ingredientitems = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "shoppinglistid")
+    @OneToMany(mappedBy = "shoppinglistid", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Nonfooditem> nonfooditems = new LinkedHashSet<>();
+
+    @PrePersist
+    public void prePersist() {
+        if (createdat == null) {
+            createdat = Instant.now();
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedat = Instant.now();
+    }
 
 }

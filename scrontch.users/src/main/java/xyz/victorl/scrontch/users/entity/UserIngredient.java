@@ -22,9 +22,4 @@ public class UserIngredient {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userid", nullable = false)
     private User userid;
-
-    @ColumnDefault("false")
-    @Column(name = "isessential", nullable = false)
-    private Boolean isessential = false;
-
 }

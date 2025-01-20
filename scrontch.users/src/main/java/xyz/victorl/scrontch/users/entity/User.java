@@ -55,6 +55,15 @@ public class User {
     @JoinColumn(name = "statusid", nullable = false)
     private Status statusid;
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdat = Instant.now();
+        this.updatedat = Instant.now();
+    }
 
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedat = Instant.now();
+    }
 
 }

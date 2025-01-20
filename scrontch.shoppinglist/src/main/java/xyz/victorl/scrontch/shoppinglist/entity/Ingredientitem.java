@@ -18,11 +18,11 @@ public class Ingredientitem {
     @Column(name = "ingredientid")
     private Integer ingredientid;
 
-    @Column(name = "ingredientitemname", length = 100)
-    private String ingredientitemname;
-
     @Column(name = "ingredientitemdescription", length = 100)
     private String ingredientitemdescription;
+
+    @Column(name = "recipeid")
+    private Integer recipeid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "shoppinglistid", nullable = false)

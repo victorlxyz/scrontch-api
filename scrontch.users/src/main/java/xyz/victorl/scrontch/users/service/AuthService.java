@@ -7,4 +7,8 @@ import xyz.victorl.scrontch.users.dto.UserRegistrationDto;
 public interface AuthService {
     void register(UserRegistrationDto registrationDto);
     JwtResponse login(LoginDto loginDto);
+
+    boolean verifyEmail(String token);
+
+    public JwtResponse refreshToken(String refreshToken);
 }

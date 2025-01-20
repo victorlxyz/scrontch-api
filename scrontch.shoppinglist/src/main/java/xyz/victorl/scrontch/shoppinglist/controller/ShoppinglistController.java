@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import xyz.victorl.scrontch.shoppinglist.dto.IngredientitemDto;
+import xyz.victorl.scrontch.shoppinglist.dto.NonfooditemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.ShoppinglistDto;
 import xyz.victorl.scrontch.shoppinglist.service.ShoppinglistService;
 
@@ -46,4 +48,27 @@ public class ShoppinglistController {
         shoppinglistService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/user/{userid}")
+    public ResponseEntity<List<ShoppinglistDto>> getShoppinglistsByUserId(@PathVariable("userid") Integer userid) {
+        List<ShoppinglistDto> shoppinglists = shoppinglistService.findByUserId(userid);
+        return ResponseEntity.ok(shoppinglists);
+    }
+
+    @PostMapping("/{id}/ingredientitems")
+    public ResponseEntity<IngredientitemDto> addIngredientToShoppinglist(
+            @PathVariable("id") Integer shoppinglistId,
+            @RequestBody IngredientitemDto ingredientitemDto) {
+        IngredientitemDto createdIngredientItem = shoppinglistService.addIngredientToShoppinglist(shoppinglistId, ingredientitemDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdIngredientItem);
+    }
+
+    @PostMapping("/{id}/nonfooditems")
+    public ResponseEntity<NonfooditemDto> addNonfooditemToShoppinglist(
+            @PathVariable("id") Integer shoppinglistId,
+            @RequestBody NonfooditemDto nonfooditemDto) {
+        NonfooditemDto createdNonFoodItem = shoppinglistService.addNonFoodItemToShoppinglist(shoppinglistId, nonfooditemDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdNonFoodItem);
+    }
+
 }

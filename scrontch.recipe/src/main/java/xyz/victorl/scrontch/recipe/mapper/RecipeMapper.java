@@ -4,8 +4,11 @@ import org.mapstruct.*;
 import xyz.victorl.scrontch.recipe.dto.RecipeDto;
 import xyz.victorl.scrontch.recipe.entity.Recipe;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {TypeMapper.class, CountryMapper.class, RecipedietMapper.class, StepMapper.class})
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {TypeMapper.class, CountryMapper.class, RecipedietMapper.class, StepMapper.class})
 public interface RecipeMapper {
+
     Recipe toEntity(RecipeDto recipeDto);
 
     @AfterMapping
@@ -18,6 +21,7 @@ public interface RecipeMapper {
         recipe.getSteps().forEach(step -> step.setRecipeid(recipe));
     }
 
+    @Mapping(target = "formattedTotalTime", expression = "java(recipe.getFormattedTotalTime())")
     RecipeDto toDto(Recipe recipe);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

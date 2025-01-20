@@ -24,6 +24,7 @@ public class RecipeDto implements Serializable {
     Set<CountryDto> countries;
     Set<RecipedietDto> recipediets;
     Set<StepDto> steps;
+    String formattedTotalTime;
 
     /**
      * DTO for {@link xyz.victorl.scrontch.recipe.entity.Step}

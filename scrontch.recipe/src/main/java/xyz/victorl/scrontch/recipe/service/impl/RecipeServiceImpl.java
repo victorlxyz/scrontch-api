@@ -3,13 +3,25 @@ package xyz.victorl.scrontch.recipe.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.victorl.scrontch.common.dto.IngredientDto;
+import xyz.victorl.scrontch.common.repository.IngredientRepository;
+import xyz.victorl.scrontch.recipe.dto.PreparationmethodDto;
 import xyz.victorl.scrontch.recipe.dto.RecipeDto;
+import xyz.victorl.scrontch.recipe.dto.StepingredientDto;
+import xyz.victorl.scrontch.recipe.dto.UnitDto;
 import xyz.victorl.scrontch.recipe.entity.Recipe;
+import xyz.victorl.scrontch.recipe.mapper.PreparationmethodMapper;
 import xyz.victorl.scrontch.recipe.mapper.RecipeMapper;
+import xyz.victorl.scrontch.recipe.mapper.UnitMapper;
 import xyz.victorl.scrontch.recipe.repository.RecipeRepository;
+import xyz.victorl.scrontch.recipe.service.IngredientService;
 import xyz.victorl.scrontch.recipe.service.RecipeService;
+import xyz.victorl.scrontch.recipe.entity.Stepingredient;
+import xyz.victorl.scrontch.recipe.repository.StepingredientRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +30,11 @@ import java.util.stream.Collectors;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final StepingredientRepository stepingredientRepository;
     private final RecipeMapper recipeMapper;
+    private final IngredientService ingredientService;
+    private final UnitMapper unitMapper;
+    private final PreparationmethodMapper preparationmethodMapper;
 
     @Override
     public List<RecipeDto> findAll() {
@@ -56,5 +72,57 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RuntimeException("Recipe not found");
         }
         recipeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<StepingredientDto> getIngredientsForRecipe(Integer recipeId, Integer userId) {
+        List<Stepingredient> stepIngredients = stepingredientRepository.findByRecipeId(recipeId);
+        List<Integer> ingredientIds = stepIngredients.stream()
+                .map(Stepingredient::getIngredientid)
+                .collect(Collectors.toList());
+
+        Map<Integer, Boolean> pantryStatusMap = getPantryStatusForUser(userId, ingredientIds);
+
+        return stepIngredients.stream()
+                .map(stepIngredient -> {
+                    IngredientDto ingredientDto = null;
+                    try {
+                        ingredientDto = ingredientService.getIngredientById(stepIngredient.getIngredientid());
+                    } catch (Exception e) {
+                        System.out.println("Error fetching ingredient ID " + stepIngredient.getIngredientid() + ": " + e.getMessage());
+                    }
+
+                    String ingredientName = ingredientDto != null && ingredientDto.getName() != null
+                            ? ingredientDto.getName()
+                            : "Unknown Ingredient";
+
+                    Boolean pantryStatus = pantryStatusMap.getOrDefault(stepIngredient.getIngredientid(), false);
+                    UnitDto unitDto = unitMapper.toDto(stepIngredient.getUnitid());
+                    PreparationmethodDto preparationmethodDto = preparationmethodMapper.toDto(stepIngredient.getPreparationid());
+
+                    return new StepingredientDto(
+                            stepIngredient.getId(),
+                            stepIngredient.getIngredientid(),
+                            stepIngredient.getQuantity(),
+                            stepIngredient.getIsoptional(),
+                            unitDto,
+                            preparationmethodDto,
+                            ingredientName,
+                            pantryStatus
+                    );
+                })
+                .collect(Collectors.toList());
+    }
+
+    private Map<Integer, Boolean> getPantryStatusForUser (Integer userId, List<Integer> ingredientIds) {
+        // Implement logic to fetch pantry status for the user
+        // This is a placeholder implementation
+        Map<Integer, Boolean> pantryStatusMap = new HashMap<>();
+
+        // Example: Assume all ingredients are in the pantry
+        for (Integer ingredientId : ingredientIds) {
+            pantryStatusMap.put(ingredientId, true); // Replace with actual logic
+        }
+        return pantryStatusMap;
     }
 }

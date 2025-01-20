@@ -65,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
         emailVerificationTokenRepository.save(verificationToken);
 
         // Build verification URL
-        String verificationUrl = "http://localhost:8086/api/v1/auth/verify-email?token=" + token;
+        String verificationUrl = "http://victorl.xyz:8086/api/v1/auth/verify-email?token=" + token;
 
         // Use EmailNotificationService to send verification email
         emailNotificationService.sendAccountVerificationEmail(user, verificationUrl);
@@ -74,17 +74,56 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public JwtResponse login(LoginDto loginDto) {
         User user = userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(), loginDto.getUsernameOrEmail())
-                .orElseThrow(() -> new RuntimeException("Invalid username or email"));
+                .orElseThrow(() -> new RuntimeException("Nom d'utilisateur ou mot de passe incorrect"));
 
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPasswordhash())) {
-            throw new RuntimeException("Invalid password");
+            throw new RuntimeException("Mot de passe incorrect");
         }
 
         if (!user.getEmailVerified()) {
-            throw new RuntimeException("Email not verified. Please verify your email before logging in.");
+            throw new RuntimeException("Vous n'avez pas vérifié votre adresse email. Vérifiez votre email avant de continuer.");
         }
 
-        String token = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
-        return new JwtResponse(token, user.getUsername(), user.getEmail(), user.getRoleid().getName());
+        user.setLastloginat(Instant.now());
+        userRepository.save(user);
+
+        String accessToken = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
+        String refreshToken = jwtUtils.generateRefreshToken(user.getUsername());
+
+        return new JwtResponse(accessToken, user.getUsername(), user.getEmail(), user.getRoleid().getName(), user.getId(), refreshToken);
     }
+
+    @Override
+    public boolean verifyEmail(String token) {
+        EmailVerificationToken verificationToken = emailVerificationTokenRepository.findByToken(token);
+        if (verificationToken != null && verificationToken.getExpiryDate().isAfter(Instant.now())) {
+            User user = verificationToken.getUser();
+            user.setEmailVerified(true);
+            userRepository.save(user);
+            // Delete the verification token since it's no longer needed
+            emailVerificationTokenRepository.deleteById(verificationToken.getId());
+            // Send confirmation email
+            emailNotificationService.sendAccountValidationEmail(user);
+            System.out.println("User verified: " + user.getUsername());
+            return true;
+        }
+        throw new RuntimeException("Token expiré ou invalide");
+    }
+
+    @Override
+    public JwtResponse refreshToken(String refreshToken) {
+        if (!jwtUtils.validateToken(refreshToken)) {
+            throw new RuntimeException("Invalid refresh token");
+        }
+
+        String username = jwtUtils.extractUsername(refreshToken);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        String newAccessToken = jwtUtils.generateToken(user.getUsername(), user.getRoleid().getName());
+        String newRefreshToken = jwtUtils.generateRefreshToken(user.getUsername());
+        return new JwtResponse(newAccessToken, user.getUsername(), user.getEmail(), user.getRoleid().getName(), user.getId(), newRefreshToken);
+    }
+
+
 }
