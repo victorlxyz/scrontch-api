@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.victorl.scrontch.common.dto.IngredientDto;
-import xyz.victorl.scrontch.common.repository.IngredientRepository;
 import xyz.victorl.scrontch.recipe.dto.PreparationmethodDto;
 import xyz.victorl.scrontch.recipe.dto.RecipeDto;
 import xyz.victorl.scrontch.recipe.dto.StepingredientDto;
@@ -18,10 +17,7 @@ import xyz.victorl.scrontch.recipe.service.IngredientService;
 import xyz.victorl.scrontch.recipe.service.RecipeService;
 import xyz.victorl.scrontch.recipe.entity.Stepingredient;
 import xyz.victorl.scrontch.recipe.repository.StepingredientRepository;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,9 +75,7 @@ public class RecipeServiceImpl implements RecipeService {
         List<Stepingredient> stepIngredients = stepingredientRepository.findByRecipeId(recipeId);
         List<Integer> ingredientIds = stepIngredients.stream()
                 .map(Stepingredient::getIngredientid)
-                .collect(Collectors.toList());
-
-        Map<Integer, Boolean> pantryStatusMap = getPantryStatusForUser(userId, ingredientIds);
+                .toList();
 
         return stepIngredients.stream()
                 .map(stepIngredient -> {
@@ -91,12 +85,6 @@ public class RecipeServiceImpl implements RecipeService {
                     } catch (Exception e) {
                         System.out.println("Error fetching ingredient ID " + stepIngredient.getIngredientid() + ": " + e.getMessage());
                     }
-
-                    String ingredientName = ingredientDto != null && ingredientDto.getName() != null
-                            ? ingredientDto.getName()
-                            : "Unknown Ingredient";
-
-                    Boolean pantryStatus = pantryStatusMap.getOrDefault(stepIngredient.getIngredientid(), false);
                     UnitDto unitDto = unitMapper.toDto(stepIngredient.getUnitid());
                     PreparationmethodDto preparationmethodDto = preparationmethodMapper.toDto(stepIngredient.getPreparationid());
 
@@ -106,23 +94,9 @@ public class RecipeServiceImpl implements RecipeService {
                             stepIngredient.getQuantity(),
                             stepIngredient.getIsoptional(),
                             unitDto,
-                            preparationmethodDto,
-                            ingredientName,
-                            pantryStatus
+                            preparationmethodDto
                     );
                 })
                 .collect(Collectors.toList());
-    }
-
-    private Map<Integer, Boolean> getPantryStatusForUser (Integer userId, List<Integer> ingredientIds) {
-        // Implement logic to fetch pantry status for the user
-        // This is a placeholder implementation
-        Map<Integer, Boolean> pantryStatusMap = new HashMap<>();
-
-        // Example: Assume all ingredients are in the pantry
-        for (Integer ingredientId : ingredientIds) {
-            pantryStatusMap.put(ingredientId, true); // Replace with actual logic
-        }
-        return pantryStatusMap;
     }
 }

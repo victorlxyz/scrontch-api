@@ -8,7 +8,7 @@ import xyz.victorl.scrontch.common.dto.IngredientDto;
 @Service
 public class IngredientService {
 
-    @Value("${ingredient.service.url}") // URL of the Ingredient Microservice
+    @Value("${ingredient.service.url}")
     private String ingredientServiceUrl;
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -25,7 +25,7 @@ public class IngredientService {
             return ingredientDto;
         } catch (Exception e) {
             System.out.println("Error fetching ingredient: " + e.getMessage());
-            return null; // Handle the exception as needed
+            return null;
         }
     }
 }

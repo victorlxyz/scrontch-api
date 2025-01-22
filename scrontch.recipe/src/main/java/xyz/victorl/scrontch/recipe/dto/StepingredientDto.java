@@ -15,6 +15,4 @@ public class StepingredientDto implements Serializable {
     Boolean isoptional;
     UnitDto unitid;
     PreparationmethodDto preparationid;
-    String ingredientName;
-    Boolean pantryStatus;
 }

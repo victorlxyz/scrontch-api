@@ -23,7 +23,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RecipeDto> getRecipeById(@PathVariable Integer id) {
+    public ResponseEntity<RecipeDto> getRecipeById(@PathVariable(name = "id") Integer id) {
         RecipeDto recipe = recipeService.findById(id);
         return ResponseEntity.ok(recipe);
     }
@@ -36,13 +36,13 @@ public class RecipeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<RecipeDto> updateRecipe(
-            @PathVariable Integer id, @RequestBody RecipeDto recipeDto) {
+            @PathVariable(name = "id") Integer id, @RequestBody RecipeDto recipeDto) {
         RecipeDto updatedRecipe = recipeService.update(id, recipeDto);
         return ResponseEntity.ok(updatedRecipe);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRecipe(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteRecipe(@PathVariable(name = "id") Integer id) {
         recipeService.delete(id);
         return ResponseEntity.noContent().build();
     }
