@@ -3,6 +3,8 @@ package xyz.victorl.scrontch.users.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.ApplicationEventPublisher;
+import xyz.victorl.scrontch.users.event.UserCreatedEvent;
 
 import java.time.Instant;
 
@@ -64,6 +66,20 @@ public class User {
     @PreUpdate
     protected void onUpdate() {
         this.updatedat = Instant.now();
+    }
+
+    @Transient
+    private ApplicationEventPublisher eventPublisher;
+
+    public void setEventPublisher(ApplicationEventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
+    }
+
+    @PostPersist
+    protected void onPostPersist() {
+        if (eventPublisher != null) {
+            eventPublisher.publishEvent(new UserCreatedEvent(this, this.id));
+        }
     }
 
 }
