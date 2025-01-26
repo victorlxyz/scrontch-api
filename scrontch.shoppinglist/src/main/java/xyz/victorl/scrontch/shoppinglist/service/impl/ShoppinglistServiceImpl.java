@@ -9,6 +9,7 @@ import xyz.victorl.scrontch.shoppinglist.dto.ShoppinglistDto;
 import xyz.victorl.scrontch.shoppinglist.entity.Ingredientitem;
 import xyz.victorl.scrontch.shoppinglist.entity.Nonfooditem;
 import xyz.victorl.scrontch.shoppinglist.entity.Shoppinglist;
+import xyz.victorl.scrontch.shoppinglist.exception.DefaultListDeletionException;
 import xyz.victorl.scrontch.shoppinglist.mapper.IngredientitemMapper;
 import xyz.victorl.scrontch.shoppinglist.mapper.NonfooditemMapper;
 import xyz.victorl.scrontch.shoppinglist.mapper.ShoppinglistMapper;
@@ -105,6 +106,18 @@ public class ShoppinglistServiceImpl implements ShoppinglistService {
         Nonfooditem savedItem = nonfooditemRepository.save(nonfooditem);
 
         return nonfooditemMapper.toDto(savedItem);
+    }
+
+    @Override
+    public void deleteShoppingList(Integer listId) {
+        Shoppinglist list = shoppinglistRepository.findById(listId)
+                .orElseThrow(() -> new RuntimeException("Shopping list not found"));
+
+        if (list.getName().equals(Shoppinglist.DEFAULT_LIST_NAME)) {
+            throw new DefaultListDeletionException("Cannot delete the default shopping list");
+        }
+
+        shoppinglistRepository.delete(list);
     }
 
 }

@@ -22,4 +22,6 @@ public interface ShoppinglistService {
     IngredientitemDto addIngredientToShoppinglist(Integer shoppinglistId, IngredientitemDto ingredientitemDto);
 
     NonfooditemDto addNonFoodItemToShoppinglist(Integer shoppinglistId, NonfooditemDto nonfooditemDto);
+
+    void deleteShoppingList(Integer listId);
 }
