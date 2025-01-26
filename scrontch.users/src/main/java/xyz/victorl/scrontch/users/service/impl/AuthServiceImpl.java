@@ -65,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
         emailVerificationTokenRepository.save(verificationToken);
 
         // Build verification URL
-        String verificationUrl = "http://victorl.xyz:8086/api/v1/auth/verify-email?token=" + token;
+        String verificationUrl = "https://victorl.xyz:8086/api/v1/auth/verify-email?token=" + token;
 
         // Use EmailNotificationService to send verification email
         emailNotificationService.sendAccountVerificationEmail(user, verificationUrl);
