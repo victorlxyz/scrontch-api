@@ -10,7 +10,7 @@ import xyz.victorl.scrontch.comment.service.StatusService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/statuses")
+@RequestMapping("/api/v1/commentstatuses")
 @RequiredArgsConstructor
 public class CommentStatusController {
 

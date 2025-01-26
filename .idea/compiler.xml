@@ -16,12 +16,15 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.6.3/mapstruct-1.6.3.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.6.3/mapstruct-1.6.3.jar" />
         </processorPath>
         <module name="scrontch.common" />
         <module name="scrontch.comment" />
         <module name="scrontch.recipe" />
-        <module name="scrontch.ingredient" />
         <module name="scrontch.users" />
+        <module name="scrontch.ingredient" />
         <module name="scrontch.shoppinglist" />
         <module name="scrontch.diet" />
       </profile>
@@ -32,12 +35,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="scrontch.comment" options="" />
-      <module name="scrontch.diet" options="" />
-      <module name="scrontch.ingredient" options="" />
-      <module name="scrontch.recipe" options="" />
-      <module name="scrontch.shoppinglist" options="" />
-      <module name="scrontch.users" options="" />
+      <module name="scrontch.comment" options="-parameters" />
+      <module name="scrontch.common" options="-parameters" />
+      <module name="scrontch.diet" options="-parameters" />
+      <module name="scrontch.ingredient" options="-parameters" />
+      <module name="scrontch.recipe" options="-parameters" />
+      <module name="scrontch.shoppinglist" options="-parameters" />
+      <module name="scrontch.users" options="-parameters" />
     </option>
   </component>
 </project>
