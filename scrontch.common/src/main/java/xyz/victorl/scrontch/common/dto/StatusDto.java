@@ -1,12 +1,10 @@
-package xyz.victorl.scrontch.users.dto;
+package xyz.victorl.scrontch.common.dto;
 
 import lombok.Value;
 
 import java.io.Serializable;
 
-/**
- * DTO for {@link xyz.victorl.scrontch.users.entity.Status}
- */
+
 @Value
 public class StatusDto implements Serializable {
     Integer id;

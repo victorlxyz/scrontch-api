@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import xyz.victorl.scrontch.users.dto.StatusDto;
+import xyz.victorl.scrontch.common.dto.StatusDto;
 import xyz.victorl.scrontch.users.service.StatusService;
 
 import java.util.List;

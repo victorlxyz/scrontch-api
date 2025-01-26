@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import xyz.victorl.scrontch.users.service.UserService;
+import xyz.victorl.scrontch.common.service.UserService;
 import xyz.victorl.scrontch.users.service.impl.TokenBlacklistService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,7 @@
 package xyz.victorl.scrontch.users.mapper;
 
 import org.mapstruct.*;
+import xyz.victorl.scrontch.common.mapper.UserMapper;
 import xyz.victorl.scrontch.users.dto.UserIngredientDto;
 import xyz.victorl.scrontch.users.entity.UserIngredient;
 

@@ -21,12 +21,10 @@ public class JwtUtils {
     @Value("${jwt.refreshexpiration}")
     private Long refreshExpiration;
 
-    // Generate the SecretKey using the secret string
     public SecretKey getSecretKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    // Extract username from token
     public String extractUsername(String token) {
         try {
             return Jwts.parser()  // Use parserBuilder to avoid deprecated methods

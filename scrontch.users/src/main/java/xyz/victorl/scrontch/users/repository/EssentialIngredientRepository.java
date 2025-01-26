@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import xyz.victorl.scrontch.users.entity.EssentialIngredient;
-import xyz.victorl.scrontch.users.entity.User;
+import xyz.victorl.scrontch.common.entity.User;
 
 import java.util.List;
 

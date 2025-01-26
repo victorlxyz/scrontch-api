@@ -3,6 +3,7 @@ package xyz.victorl.scrontch.shoppinglist.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.victorl.scrontch.common.service.UserService;
 import xyz.victorl.scrontch.shoppinglist.dto.IngredientitemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.NonfooditemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.ShoppinglistDto;
@@ -32,6 +33,7 @@ public class ShoppinglistServiceImpl implements ShoppinglistService {
     private final NonfooditemMapper nonfooditemMapper;
     private final IngredientitemRepository ingredientitemRepository;
     private final NonfooditemRepository nonfooditemRepository;
+    private final UserService userService;
 
     @Override
     public List<ShoppinglistDto> findAll() {
@@ -118,6 +120,24 @@ public class ShoppinglistServiceImpl implements ShoppinglistService {
         }
 
         shoppinglistRepository.delete(list);
+    }
+
+    @Transactional
+    public void createDefaultListIfNotExists(Integer userId) {
+        if (!userService.existsById(userId)) {
+            throw new IllegalArgumentException("User does not exist");
+        }
+        boolean hasDefaultList = shoppinglistRepository.existsByUseridAndName(
+                userId,
+                "Liste de courses"
+        );
+
+        if (!hasDefaultList) {
+            Shoppinglist defaultList = new Shoppinglist();
+            defaultList.setUserid(userId);
+            defaultList.setName("Liste de courses");
+            shoppinglistRepository.save(defaultList);
+        }
     }
 
 }

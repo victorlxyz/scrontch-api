@@ -3,9 +3,9 @@ package xyz.victorl.scrontch.users.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.victorl.scrontch.users.dto.StatusDto;
-import xyz.victorl.scrontch.users.entity.Status;
-import xyz.victorl.scrontch.users.mapper.StatusMapper;
+import xyz.victorl.scrontch.common.dto.StatusDto;
+import xyz.victorl.scrontch.common.entity.Status;
+import xyz.victorl.scrontch.common.mapper.StatusMapper;
 import xyz.victorl.scrontch.users.repository.StatusRepository;
 import xyz.victorl.scrontch.users.service.StatusService;
 

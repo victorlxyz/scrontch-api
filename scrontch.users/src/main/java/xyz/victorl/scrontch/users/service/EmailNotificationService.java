@@ -1,6 +1,6 @@
 package xyz.victorl.scrontch.users.service;
 
-import xyz.victorl.scrontch.users.entity.User;
+import xyz.victorl.scrontch.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,6 +3,7 @@ package xyz.victorl.scrontch.users.entity;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.*;
+import xyz.victorl.scrontch.common.entity.User;
 
 import java.time.Instant;
 

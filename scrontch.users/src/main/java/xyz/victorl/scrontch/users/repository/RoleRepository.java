@@ -1,7 +1,7 @@
 package xyz.victorl.scrontch.users.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import xyz.victorl.scrontch.users.entity.Role;
+import xyz.victorl.scrontch.common.entity.Role;
 
 import java.util.Optional;
 

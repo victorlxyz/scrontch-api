@@ -1,16 +1,16 @@
-package xyz.victorl.scrontch.users.entity;
+package xyz.victorl.scrontch.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEventPublisher;
-import xyz.victorl.scrontch.users.event.UserCreatedEvent;
+import xyz.victorl.scrontch.common.event.UserCreatedEvent;
 
 import java.time.Instant;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "CommonUser")
 @Table(name = "users")
 public class User {
     @Id

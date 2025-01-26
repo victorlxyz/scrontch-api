@@ -1,6 +1,6 @@
 package xyz.victorl.scrontch.users.service;
 
-import xyz.victorl.scrontch.users.dto.RoleDto;
+import xyz.victorl.scrontch.common.dto.RoleDto;
 
 import java.util.List;
 

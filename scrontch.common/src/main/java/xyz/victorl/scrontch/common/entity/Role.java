@@ -1,4 +1,4 @@
-package xyz.victorl.scrontch.users.entity;
+package xyz.victorl.scrontch.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

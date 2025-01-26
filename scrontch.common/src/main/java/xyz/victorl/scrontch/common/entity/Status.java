@@ -1,4 +1,4 @@
-package xyz.victorl.scrontch.users.entity;
+package xyz.victorl.scrontch.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "CommonStatus")
 @Table(name = "status")
 public class Status {
     @Id

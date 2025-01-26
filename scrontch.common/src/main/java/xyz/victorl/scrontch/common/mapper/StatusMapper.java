@@ -1,11 +1,14 @@
-package xyz.victorl.scrontch.users.mapper;
+package xyz.victorl.scrontch.common.mapper;
 
 import org.mapstruct.*;
-import xyz.victorl.scrontch.users.dto.StatusDto;
-import xyz.victorl.scrontch.users.entity.Status;
+import org.springframework.stereotype.Component;
+import xyz.victorl.scrontch.common.dto.StatusDto;
+import xyz.victorl.scrontch.common.entity.Status;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+
 public interface StatusMapper {
+
     Status toEntity(StatusDto statusDto);
 
     StatusDto toDto(Status status);

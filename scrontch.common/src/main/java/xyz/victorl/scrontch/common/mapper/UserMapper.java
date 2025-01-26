@@ -1,13 +1,12 @@
-package xyz.victorl.scrontch.users.mapper;
+package xyz.victorl.scrontch.common.mapper;
 
 import org.mapstruct.*;
-import xyz.victorl.scrontch.users.dto.UserDto;
-import xyz.victorl.scrontch.users.entity.User;
+import xyz.victorl.scrontch.common.dto.UserDto;
+import xyz.victorl.scrontch.common.entity.User;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {RoleMapper.class, StatusMapper.class})
 public interface UserMapper {
     User toEntity(UserDto userDto);
-
     UserDto toDto(User user);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

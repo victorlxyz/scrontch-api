@@ -1,7 +1,7 @@
-package xyz.victorl.scrontch.users.repository;
+package xyz.victorl.scrontch.common.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import xyz.victorl.scrontch.users.entity.User;
+import xyz.victorl.scrontch.common.entity.User;
 
 import java.util.Optional;
 

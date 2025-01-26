@@ -1,6 +1,6 @@
 package xyz.victorl.scrontch.users.service;
 
-import xyz.victorl.scrontch.users.dto.StatusDto;
+import xyz.victorl.scrontch.common.dto.StatusDto;
 
 import java.util.List;
 

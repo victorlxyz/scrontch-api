@@ -1,10 +1,11 @@
 package xyz.victorl.scrontch.users.mapper;
 
 import org.mapstruct.*;
+import xyz.victorl.scrontch.common.mapper.UserMapper;
 import xyz.victorl.scrontch.users.dto.UserDietDto;
-import xyz.victorl.scrontch.users.entity.User;
+import xyz.victorl.scrontch.common.entity.User;
 import xyz.victorl.scrontch.users.entity.UserDiet;
-import xyz.victorl.scrontch.users.repository.UserRepository;
+import xyz.victorl.scrontch.common.repository.UserRepository;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {UserMapper.class})
 public interface UserDietMapper {

@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import xyz.victorl.scrontch.users.dto.UserDto;
-import xyz.victorl.scrontch.users.service.UserService;
+import xyz.victorl.scrontch.common.dto.UserDto;
+import xyz.victorl.scrontch.common.service.UserService;
 
 import java.util.List;
 
@@ -26,6 +26,12 @@ public class UserController {
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
         UserDto user = userService.findById(id);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/{id}/exists")
+    public ResponseEntity<Boolean> userExists(@PathVariable Integer id) {
+        boolean exists = userService.existsById(id);
+        return ResponseEntity.ok(exists);
     }
 
     @PostMapping

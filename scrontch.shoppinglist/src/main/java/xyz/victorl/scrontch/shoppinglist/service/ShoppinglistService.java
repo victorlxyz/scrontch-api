@@ -3,7 +3,7 @@ package xyz.victorl.scrontch.shoppinglist.service;
 import xyz.victorl.scrontch.shoppinglist.dto.IngredientitemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.NonfooditemDto;
 import xyz.victorl.scrontch.shoppinglist.dto.ShoppinglistDto;
-
+import xyz.victorl.scrontch.common.service.UserService;
 import java.util.List;
 
 public interface ShoppinglistService {
