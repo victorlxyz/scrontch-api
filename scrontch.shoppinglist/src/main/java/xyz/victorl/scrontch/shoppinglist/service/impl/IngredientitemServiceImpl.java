@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.victorl.scrontch.shoppinglist.dto.IngredientitemDto;
-import xyz.victorl.scrontch.shoppinglist.entity.Ingredientitem;
-import xyz.victorl.scrontch.shoppinglist.entity.Shoppinglist;
+import xyz.victorl.scrontch.common.entity.Ingredientitem;
+import xyz.victorl.scrontch.common.entity.Shoppinglist;
 import xyz.victorl.scrontch.shoppinglist.mapper.IngredientitemMapper;
 import xyz.victorl.scrontch.shoppinglist.repository.IngredientitemRepository;
-import xyz.victorl.scrontch.shoppinglist.repository.ShoppinglistRepository;
+import xyz.victorl.scrontch.common.repository.ShoppinglistRepository;
 import xyz.victorl.scrontch.shoppinglist.service.IngredientitemService;
 
 import java.util.List;

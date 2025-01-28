@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.victorl.scrontch.shoppinglist.dto.NonfooditemDto;
-import xyz.victorl.scrontch.shoppinglist.entity.Nonfooditem;
+import xyz.victorl.scrontch.common.entity.Nonfooditem;
 import xyz.victorl.scrontch.shoppinglist.mapper.NonfooditemMapper;
 import xyz.victorl.scrontch.shoppinglist.repository.NonfooditemRepository;
 import xyz.victorl.scrontch.shoppinglist.service.NonfooditemService;

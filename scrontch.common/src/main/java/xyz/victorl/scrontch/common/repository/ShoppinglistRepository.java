@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ShoppinglistRepository extends JpaRepository<Shoppinglist, Integer> {
     List<Shoppinglist> findByUserid(Integer userid);
+
+    boolean existsByUseridAndName(Integer userId, String listeDeCourses);
 }

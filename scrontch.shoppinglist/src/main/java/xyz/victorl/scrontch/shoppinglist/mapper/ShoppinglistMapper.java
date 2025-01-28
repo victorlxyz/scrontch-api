@@ -2,7 +2,7 @@ package xyz.victorl.scrontch.shoppinglist.mapper;
 
 import org.mapstruct.*;
 import xyz.victorl.scrontch.shoppinglist.dto.ShoppinglistDto;
-import xyz.victorl.scrontch.shoppinglist.entity.Shoppinglist;
+import xyz.victorl.scrontch.common.entity.Shoppinglist;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {IngredientitemMapper.class, NonfooditemMapper.class})
 public interface ShoppinglistMapper {

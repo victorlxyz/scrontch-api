@@ -1,4 +1,4 @@
-package xyz.victorl.scrontch.comment.exception;
+package xyz.victorl.scrontch.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

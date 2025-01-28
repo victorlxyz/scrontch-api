@@ -7,9 +7,7 @@ import lombok.Value;
 
 import java.io.Serializable;
 
-/**
- * DTO for {@link xyz.victorl.scrontch.shoppinglist.entity.Ingredientitem}
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
