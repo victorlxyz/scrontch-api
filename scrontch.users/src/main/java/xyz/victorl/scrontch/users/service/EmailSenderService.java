@@ -16,7 +16,6 @@ public class EmailSenderService {
     @Autowired
     private HandlerMapping resourceHandlerMapping;
 
-    // service for sending emails from the email address of the application
     public void sendEmail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("scrontch.noreply@gmail.com");

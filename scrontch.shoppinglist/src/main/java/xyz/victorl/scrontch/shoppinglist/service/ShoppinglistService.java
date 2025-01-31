@@ -24,4 +24,6 @@ public interface ShoppinglistService {
     NonfooditemDto addNonFoodItemToShoppinglist(Integer shoppinglistId, NonfooditemDto nonfooditemDto);
 
     void deleteShoppingList(Integer listId);
+
+    void createDefaultListIfNotExists(Integer id);
 }
