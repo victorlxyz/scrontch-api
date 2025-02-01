@@ -21,6 +21,10 @@ public class Recipeitem {
     @Column(name = "recipename", length = 150)
     private String recipename;
 
+
+    @Column(name = "recipelink")
+    private String recipeLink;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recipelistid", nullable = false)
     private Recipelist recipelistid;

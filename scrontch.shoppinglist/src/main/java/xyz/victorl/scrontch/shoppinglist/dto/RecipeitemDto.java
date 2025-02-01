@@ -17,5 +17,6 @@ public class RecipeitemDto implements Serializable {
     Integer id;
     Integer recipeid;
     String recipename;
+    String recipeLink;
     private Integer recipelistid;
 }
